@@ -39,34 +39,21 @@ $events = [
     [
         'date' => '2020-12',
         'event' => 'name8'
-    ]
+    ],
+    [
+        'date' => '2020-12',
+        'event' => 'name9'
+    ],
 ];
 
-$eventsByYearMonth = [];
+$result = [];
 
 foreach ($events as $event) {
-    $dateParts = explode('-', $event['date']);
-    $year = $dateParts[0];
-    $month = $dateParts[1];
-    
-    if (!isset($eventsByYearMonth[$year])) {
-        $eventsByYearMonth[$year] = [];
-    }
-    
-    if (!isset($eventsByYearMonth[$year][$month])) {
-        $eventsByYearMonth[$year][$month] = [];
-    }
-    
-    $eventsByYearMonth[$year][$month][] = $event['event'];
+    $date = explode('-', $event['date']);
+    $year = $date[0];
+    $month = $date[1];
+    $result[$year][$month][] = $event['event'];
 }
 
-foreach ($eventsByYearMonth as $year => $months) {
-    echo $year . ":\n";
-    foreach ($months as $month => $events) {
-        echo "  $month:\n";
-        foreach ($events as $event) {
-            echo "    - $event\n";
-        }
-    }
-}
+print_r($result);
 ?>
